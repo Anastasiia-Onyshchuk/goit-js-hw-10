@@ -4,10 +4,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const breedSelect = document.querySelector("select.breed-select");
 const catInfoDiv = document.querySelector("div.cat-info");
 const loader = document.querySelector(".loader");
-const error = document.querySelector(".error");
+const errorDiv = document.querySelector(".error");
 
 loader.style.display = "block"; 
-error.style.display = "none"
+errorDiv.style.display = "none"
 
 fetchBreeds()
   .then(breeds => {
@@ -19,11 +19,10 @@ fetchBreeds()
     });
       loader.style.display = "none"; 
       breedSelect.style.display = "block";
-      error.style.display = "none"
+      errorDiv.style.display = "none"
   })
     .catch(error => {
-    //   console.error('Error fetching breeds:', error);
-      error.style.display = "block"
+      errorDiv.style.display = "block"
         console.log(error)
         Notify.failure('Oops! Something went wrong! Try reloading the page!');
   });
@@ -44,17 +43,14 @@ breedSelect.addEventListener("change", event => {
           catInfoDiv.innerHTML = catInfoContainer;
       })
       .catch(error => {
-        // console.error('Error fetching cat:', error);
-                error.style.display = "block"
+                errorDiv.style.display = "block"
                   console.log(error)
         Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })
     .finally(() => {
       loader.style.display = "none"; 
         catInfoDiv.style.display = "flex"; 
-        error.style.display = "none"
+        errorDiv.style.display = "none"
     });
 });
-
-
 
